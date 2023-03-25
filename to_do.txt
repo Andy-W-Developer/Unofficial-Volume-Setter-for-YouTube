@@ -1,0 +1,12 @@
+Simulate context menu on the video
+
+Simulate left mouse click on "Stats for nerds"
+
+Get the dB level from "content loudness"
+
+Adjust the video's volume with Web Audio API so that the new content loudness is at 0dB
+
+
+Videos that are quieter than -10dB should be increased by no more than 10dB
+
+Simple On/Off button
