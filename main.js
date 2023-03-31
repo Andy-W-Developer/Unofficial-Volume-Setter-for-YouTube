@@ -6,3 +6,5 @@ video.dispatchEvent(contextMenu)
 var volumeVideo
 var volumeGain
 var volumeVideoNew
+
+var contextMenuOptions = document.getElementsByClassName("ytp-menuitem-label")
