@@ -9,3 +9,5 @@ var volumeVideoNew
 
 var contextMenuItems = document.getElementsByClassName("ytp-menuitem")
 var click = new MouseEvent("click")
+
+contextMenuItems[6].dispatchEvent(click)
