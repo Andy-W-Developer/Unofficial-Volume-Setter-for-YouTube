@@ -7,4 +7,4 @@ var volumeVideo
 var volumeGain
 var volumeVideoNew
 
-var contextMenuOptions = document.getElementsByClassName("ytp-menuitem-label")
+var contextMenuItems = document.getElementsByClassName("ytp-menuitem")
