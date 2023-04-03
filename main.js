@@ -17,8 +17,6 @@ var volumeDecibel
 if (infoPanelVolumes[6].includes('-')) {
     volumeDecibel = parseFloat(infoPanelVolumes[6].replace('-', '').replace('dB)',''));
 
-    // Start of Web Audio API
-
     const audioContext = new AudioContext();
     const audio = document.getElementsByClassName("video-stream html5-main-video")[0];
 
