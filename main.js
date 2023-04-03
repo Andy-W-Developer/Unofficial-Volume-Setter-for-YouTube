@@ -12,5 +12,5 @@ var infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.spl
 var volumeNormalized = parseInt(infoPanelVolumes[3].replace('%', ''))
 var volumeDecibel
 if (infoPanelVolumes[6].includes('-')) {
-    volumeDecibel = parseInt(infoPanelVolumes[6].replace('-', '').replace('dB)',''))
+    volumeDecibel = parseFloat(infoPanelVolumes[6].replace('-', '').replace('dB)',''))
 }
