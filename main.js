@@ -14,3 +14,6 @@ var volumeDecibel
 if (infoPanelVolumes[6].includes('-')) {
     volumeDecibel = parseFloat(infoPanelVolumes[6].replace('-', '').replace('dB)',''))
 }
+
+var infoPanelClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0]
+infoPanelClose.dispatchEvent(click)
