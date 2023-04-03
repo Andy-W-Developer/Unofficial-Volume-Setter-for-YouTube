@@ -21,3 +21,15 @@ if (infoPanelVolumes[6].includes('-')) {
 var infoPanelClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
 
 infoPanelClose.dispatchEvent(click);
+
+// Start of Web Audio API
+
+const audioContext = new AudioContext();
+const audio = document.getElementsByClassName("video-stream html5-main-video")[0];
+
+const track = audioContext.createMediaElementSource(audio);
+var audioGain = audioContext.createGain();
+
+audioGain.gain.value = 1;
+
+track.connect(audioGain).connect(audioContext.destination);
