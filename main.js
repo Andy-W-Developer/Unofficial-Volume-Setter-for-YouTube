@@ -15,7 +15,7 @@ var infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.spl
 var volumeNormalized = parseInt(infoPanelVolumes[3].replace('%', ''));
 var volumeDecibel
 if (infoPanelVolumes[6].includes('-')) {
-    volumeDecibel = parseFloat(infoPanelVolumes[6].replace('-', '').replace('dB)',''));
+    volumeDecibel = parseFloat(infoPanelVolumes[6].replace('dB)',''));
 
     const audioContext = new AudioContext();
     const audio = document.getElementsByClassName("video-stream html5-main-video")[0];
@@ -23,7 +23,10 @@ if (infoPanelVolumes[6].includes('-')) {
     const track = audioContext.createMediaElementSource(audio);
     var audioGain = audioContext.createGain();
 
-    audioGain.gain.value = 1;
+    volumeRatio = 10 ** (volumeDecibel / 20);
+    volumeGain = 1 / volumeRatio;
+
+    audioGain.gain.value = volumeGain;
 
     track.connect(audioGain).connect(audioContext.destination);
 }
