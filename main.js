@@ -16,6 +16,9 @@ var volumeNormalized = parseInt(infoPanelVolumes[3].replace('%', ''));
 var volumeDecibel
 if (infoPanelVolumes[6].includes('-')) {
     volumeDecibel = parseFloat(infoPanelVolumes[6].replace('dB)',''));
+    if (volumeDecibel < -15) {
+        volumeDecibel = -15;
+    }
 
     const audioContext = new AudioContext();
     const audio = document.getElementsByClassName("video-stream html5-main-video")[0];
