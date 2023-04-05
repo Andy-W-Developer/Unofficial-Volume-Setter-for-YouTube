@@ -12,7 +12,6 @@ var infoPanel = document.getElementsByClassName("html5-video-info-panel-content 
 
 // EXAMPLE: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
 var infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.split(' ');
-var volumeNormalized = parseInt(infoPanelVolumes[3].replace('%', ''));
 var volumeDecibel
 if (infoPanelVolumes[6].includes('-')) {
     volumeDecibel = parseFloat(infoPanelVolumes[6].replace('dB)',''));
