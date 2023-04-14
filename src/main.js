@@ -1,3 +1,6 @@
+import {videoPanelOpen, videoPanelSelectIndex, videoInfoPanelClose} from "./modules/panels.mjs"
+
+
 var video = document.getElementById("movie_player");
 var menu = new MouseEvent("contextmenu");
 
