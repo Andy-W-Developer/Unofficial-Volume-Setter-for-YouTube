@@ -5,15 +5,11 @@ function videoPanelOpen() {
     video.dispatchEvent(menu);
 }
 
-function videoPanelSelectIndex(index) {
+function videoPanelSelect(index) {
     var menuItems = document.getElementsByClassName("ytp-menuitem");
     var click = new MouseEvent("click");
 
     menuItems[index].dispatchEvent(click);
-}
-
-function videoPanelSelectString(option) {
-
 }
 
 function videoInfoPanelClose() {
@@ -23,7 +19,4 @@ function videoInfoPanelClose() {
     infoPanelClose.dispatchEvent(click);
 }
 
-export {videoPanelOpen,
-        videoPanelSelectIndex,
-        videoPanelSelectString,
-        videoInfoPanelClose}
+export {videoPanelOpen, videoPanelSelect, videoInfoPanelClose};
