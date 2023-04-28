@@ -1,0 +1,16 @@
+{
+  
+  "manifest_version": 2,
+  "name": "YouTube Volume Normalization",
+  "version": "0.2",
+
+  "description": "Normalizes the volumes of quiet YouTube videos to YouTubes 0dB baseline.",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["main.js"]
+    }
+  ]
+  
+}
