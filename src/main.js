@@ -49,6 +49,17 @@ function changeVolumeDecibel() {
     console.log("Volume change complete, volume changed to: " + audioGain.gain.value);
 }
 
+try {
+    parseVolumeDecibel();
+    changeVolumeDecibel();
+
+    console.log("New audio gain: " + audioGain.gain.value + "\n");
+} catch (e) {
+    console.log(e);
+}
+
+console.log("First run complete.");
+
 const callback = () => {
     console.log("Video src changed");
 
