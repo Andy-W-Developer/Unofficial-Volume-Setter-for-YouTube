@@ -1,5 +1,7 @@
 console.log("launched.");
 
+var volumeDecibel = 0;
+
 function parseVolumeDecibel() {
     let videoContainer = document.getElementById("movie_player");
     let mouseContextMenu = new MouseEvent("contextmenu");
