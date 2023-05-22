@@ -35,8 +35,8 @@ track.connect(audioGain).connect(audioContext.destination);
 var volumeDecibelTarget = 1; // 1 is 0dBFS
 
 function changeVolumeDecibel() {
-    volumeRatio = 10 ** (volumeDecibel / 20);
-    volumeGain = volumeDecibelTarget / volumeRatio;
+    volumeDecibelRatio = 10 ** (volumeDecibel / 20);
+    volumeDecibelGain = volumeDecibelTarget / volumeDecibelRatio;
 
-    audioGain.gain.value = volumeGain;
+    audioGain.gain.value = volumeDecibelGain;
 }
