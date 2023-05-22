@@ -1,13 +1,13 @@
 // *Open the Stats for nerds panel
-var video = document.getElementById("movie_player");
-var menu = new MouseEvent("contextmenu");
+var videoContainer = document.getElementById("movie_player");
+var mouseContextMenu = new MouseEvent("contextmenu");
 
-video.dispatchEvent(menu);
+videoContainer.dispatchEvent(menu);
 
-var menuItems = document.getElementsByClassName("ytp-menuitem");
-var click = new MouseEvent("click");
+var contextMenuItems = document.getElementsByClassName("ytp-menuitem");
+var mouseLeftClick = new MouseEvent("click");
 
-menuItems[6].dispatchEvent(click);
+contextMenuItems[6].dispatchEvent(click);
 
 // *Parse volumes
 // EXAMPLE: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
@@ -21,18 +21,18 @@ if (volumeDecibel > 0) {
 }
 
 // *Close the Stats for nerds window
-var infoPanelClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
+var infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
 var click = new MouseEvent("click");
 
-infoPanelClose.dispatchEvent(click);
+infoPanelButtonClose.dispatchEvent(click);
 
 // Change audio volume using Web Audio API
-var volumeTarget = 1; // 1 is 0dBFS
+var volumeDecibelTarget = 1; // 1 is 0dBFS
 
 const audioContext = new AudioContext();
-const audio = document.getElementsByClassName("video-stream html5-main-video")[0];
+const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
 
-const track = audioContext.createMediaElementSource(audio);
+const audioTrack = audioContext.createMediaElementSource(audio);
 var audioGain = audioContext.createGain();
 
 volumeRatio = 10 ** (volumeDecibel / 20);
