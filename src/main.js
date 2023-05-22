@@ -40,3 +40,15 @@ function changeVolumeDecibel() {
 
     audioGain.gain.value = volumeDecibelGain;
 }
+
+const callback = () => {
+    try {
+        parseVolumeDecibel();
+        changeVolumeDecibel();
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+const videoStreamObserver = new MutationObserver(callback);
+videoStreamObserver.observe(videoStream, {attributes:true, attributeFilter:["src"]});
