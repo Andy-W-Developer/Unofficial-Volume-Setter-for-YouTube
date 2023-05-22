@@ -22,7 +22,6 @@ if (volumeDecibel > 0) {
 
 // *Close the Stats for nerds window
 var infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
-var click = new MouseEvent("click");
 
 infoPanelButtonClose.dispatchEvent(mouseLeftClick);
 
