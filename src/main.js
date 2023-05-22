@@ -7,7 +7,7 @@ videoContainer.dispatchEvent(menu);
 var contextMenuItems = document.getElementsByClassName("ytp-menuitem");
 var mouseLeftClick = new MouseEvent("click");
 
-contextMenuItems[6].dispatchEvent(click);
+contextMenuItems[6].dispatchEvent(mouseLeftClick);
 
 // *Parse volumes
 // EXAMPLE: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
@@ -24,7 +24,7 @@ if (volumeDecibel > 0) {
 var infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
 var click = new MouseEvent("click");
 
-infoPanelButtonClose.dispatchEvent(click);
+infoPanelButtonClose.dispatchEvent(mouseLeftClick);
 
 // Change audio volume using Web Audio API
 var volumeDecibelTarget = 1; // 1 is 0dBFS
