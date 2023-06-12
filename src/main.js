@@ -33,12 +33,12 @@ function parseVolumeDecibel() {
 
 const audioContext = new AudioContext();
 const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
-const audioTrack = audioContext.createMediaElementSource(audio);
+const audioTrack = audioContext.createMediaElementSource(videoStream);
 var audioGain = audioContext.createGain();
 
-track.connect(audioGain).connect(audioContext.destination);
+audioTrack.connect(audioGain).connect(audioContext.destination);
 
-var volumeDecibelTarget = 1; // 1 is 0dBFS
+var volumeDecibelTarget = 0.2; // 1 is 0dBFS
 
 function changeVolumeDecibel() {
     let volumeDecibelRatio = 10 ** (volumeDecibel / 20);
