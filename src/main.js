@@ -1,43 +1,61 @@
-// *Open the Stats for nerds panel
-var video = document.getElementById("movie_player");
-var menu = new MouseEvent("contextmenu");
+var volumeDecibel = 0;
 
-video.dispatchEvent(menu);
+function parseVolumeDecibel() {
+    let videoContainer = document.getElementById("movie_player");
+    let mouseContextMenu = new MouseEvent("contextmenu");
 
-var menuItems = document.getElementsByClassName("ytp-menuitem");
-var click = new MouseEvent("click");
+    videoContainer.dispatchEvent(mouseContextMenu);
 
-menuItems[6].dispatchEvent(click);
+    let contextMenuItems = document.getElementsByClassName("ytp-menuitem");
+    let mouseLeftClick = new MouseEvent("click");
 
-// *Parse volumes
-// EXAMPLE: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
-var infoPanel = document.getElementsByClassName("html5-video-info-panel-content ytp-sfn-content")[0];
-var infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.split(' ');
+    // EXAMPLE - CONTEXT MENU ITEMS AND INDEXES: Loop [0], Copy video URL [1], Copy video URL at current time [2], Copy embed code [3]
+    //                                           Copy debug info [4], Troubleshoot playback issue [5], Stats for nerds [6]
+    contextMenuItems[6].dispatchEvent(mouseLeftClick);
 
-var volumeDecibel = parseFloat(infoPanelVolumes[6].replace('dB)',''));
-// YouTube automatically lowers the volumes of videos louder than 0dBFS to 0dBFS
-if (volumeDecibel > 0) {
-    volumeDecibel = 0;
+    // EXAMPLE - PANEL VOLUMES: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
+    let infoPanel = document.getElementsByClassName("html5-video-info-panel-content ytp-sfn-content")[0];
+    let infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.split(' ');
+    let infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
+
+    infoPanelButtonClose.dispatchEvent(mouseLeftClick);
+
+    volumeDecibel = parseFloat(infoPanelVolumes[6].replace('dB)',''));
+    // YouTube automatically lowers the volumes of videos louder than 0dBFS to 0dBFS
+    if (volumeDecibel > 0) {
+        volumeDecibel = 0;
+    }
 }
 
-// *Close the Stats for nerds window
-var infoPanelClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
-var click = new MouseEvent("click");
-
-infoPanelClose.dispatchEvent(click);
-
-// Change audio volume using Web Audio API
-var volumeTarget = 1; // 1 is 0dBFS
-
 const audioContext = new AudioContext();
-const audio = document.getElementsByClassName("video-stream html5-main-video")[0];
-
-const track = audioContext.createMediaElementSource(audio);
+const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
+const audioTrack = audioContext.createMediaElementSource(videoStream);
 var audioGain = audioContext.createGain();
 
-volumeRatio = 10 ** (volumeDecibel / 20);
-volumeGain = volumeTarget / volumeRatio;
+audioTrack.connect(audioGain).connect(audioContext.destination);
 
-audioGain.gain.value = volumeGain;
+var volumeDecibelTarget = 1; // 1 is 0dBFS
 
-track.connect(audioGain).connect(audioContext.destination);
+function changeVolumeDecibel() {
+    let volumeDecibelRatio = 10 ** (volumeDecibel / 20);
+    let volumeDecibelGain = volumeDecibelTarget / volumeDecibelRatio;
+
+    audioGain.gain.value = volumeDecibelGain;
+}
+
+try {
+    parseVolumeDecibel();
+    changeVolumeDecibel();
+} catch (e) {
+}
+
+const callback = () => {
+    try {
+        parseVolumeDecibel();
+        changeVolumeDecibel();
+    } catch (e) {
+    }
+}
+
+const videoStreamObserver = new MutationObserver(callback);
+videoStreamObserver.observe(videoStream, {attributes:true, attributeFilter:["src"]});
