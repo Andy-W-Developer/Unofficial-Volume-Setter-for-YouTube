@@ -1,5 +1,3 @@
-console.log("launched.");
-
 var volumeDecibel = 0;
 
 function parseVolumeDecibel() {
@@ -27,8 +25,6 @@ function parseVolumeDecibel() {
     if (volumeDecibel > 0) {
         volumeDecibel = 0;
     }
-
-    console.log("Parsing complete, volumeDecibel set to: " + volumeDecibel);
 }
 
 const audioContext = new AudioContext();
@@ -45,31 +41,19 @@ function changeVolumeDecibel() {
     let volumeDecibelGain = volumeDecibelTarget / volumeDecibelRatio;
 
     audioGain.gain.value = volumeDecibelGain;
-
-    console.log("Volume change complete, volume changed to: " + audioGain.gain.value);
 }
 
 try {
     parseVolumeDecibel();
     changeVolumeDecibel();
-
-    console.log("New audio gain: " + audioGain.gain.value + "\n");
 } catch (e) {
-    console.log(e);
 }
 
-console.log("First run complete.");
-
 const callback = () => {
-    console.log("Video src changed");
-
     try {
         parseVolumeDecibel();
         changeVolumeDecibel();
-
-        console.log("New audio gain: " + audioGain.gain.value + "\n");
     } catch (e) {
-        console.log(e);
     }
 }
 
