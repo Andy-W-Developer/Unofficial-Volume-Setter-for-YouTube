@@ -5,6 +5,7 @@
   "version": "0.2",
 
   "description": "Normalizes the volumes of YouTube videos to a user-chosen volume.",
+  "homepage_url": "https://github.com/Andy-W-Developer/YouTube-Volume-Normalization",
 
   "content_scripts": [
     {
