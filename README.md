@@ -6,4 +6,4 @@ A browser extension to normalize YouTube volumes across videos
 - Chrome
 
 # Limitations
-- Does not work for livestreams
+- Does not work for livestreams and shorts
