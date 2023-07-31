@@ -4,7 +4,7 @@
   "name": "YouTube Volume Normalization",
   "version": "0.2",
 
-  "description": "Normalizes the volumes of quiet YouTube videos to YouTubes 0dB baseline.",
+  "description": "Normalizes the volumes of YouTube videos to a user-chosen volume.",
 
   "content_scripts": [
     {
