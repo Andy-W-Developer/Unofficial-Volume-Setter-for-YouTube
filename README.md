@@ -1,5 +1,5 @@
 # YouTube-Volume-Normalization
-A browser extension to normalize YouTube volumes across videos.
+A browser extension to normalize YouTube volumes across videos
 
 # Supported Browsers
 - Firefox
