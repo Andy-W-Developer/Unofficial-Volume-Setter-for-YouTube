@@ -5,7 +5,7 @@ volumeTarget.textContent = volumeTargetSlider.value;
 volumeTargetSlider.addEventListener("input", () => {
     volumeTarget.textContent = volumeTargetSlider.value;
 
-    browser.tabs.query().then((tabs) => {
+    browser.tabs.query({}).then((tabs) => {
         for (const tab of tabs) {
             browser.tabs.sendMessage(tab.id, {volumeTarget: volumeTargetSlider.value});
         }
