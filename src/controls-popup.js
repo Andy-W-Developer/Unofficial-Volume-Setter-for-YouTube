@@ -1,5 +1,5 @@
 const volumeTargetSlider = document.getElementById("volume-target-slider");
-volumeTarget = 1;
+var volumeTarget = 1;
 
 volumeTargetSlider.addEventListener("input", () => {
     browser.tabs.query({}).then((tabs) => {
