@@ -9,7 +9,7 @@ volumeTargetSlider.addEventListener("input", () => {
         } else if (volumeTargetSlider.value < 20) {
             localStorage.setItem("volumeTarget", (0 + ((1 / 20) * volumeTargetSlider.value)).toString());
         } else {
-            volumeTarget = (volumeTargetSlider.value - 19).toString();
+            localStorage.setItem("volumeTarget", volumeTargetSlider.value - 19).toString();
         }
 
         for (const tab of tabs) {
