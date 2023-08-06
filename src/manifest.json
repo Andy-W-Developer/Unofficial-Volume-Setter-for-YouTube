@@ -13,6 +13,11 @@
     "default_popup": "controls.html"
   },
 
+  "background": {
+    "scripts": ["storage.js"],
+    "presistent": false
+  },
+
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
