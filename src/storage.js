@@ -10,7 +10,7 @@ if (volumeTarget === null) {
 
 browser.tabs.query({}).then((tabs) => {
     for (const tab of tabs) {
-        browser.tabs.sendMessage({volumeTarget});
+        browser.tabs.sendMessage(volumeTarget);
     }
 });
 
