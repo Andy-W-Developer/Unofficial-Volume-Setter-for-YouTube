@@ -13,3 +13,8 @@ browser.tabs.query({}).then((tabs) => {
         browser.tabs.sendMessage({volumeTarget});
     }
 });
+
+// Store volume target when changed in popup
+browser.runtime.onMessage.addListener((newVolumeTarget) => {
+    localStorage.setItem("volumeTarget", newVolumeTarget);
+});
