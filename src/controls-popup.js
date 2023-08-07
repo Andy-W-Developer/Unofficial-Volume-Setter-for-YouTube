@@ -3,8 +3,9 @@ var volumeTarget = 1;
 
 browser.runtime.sendMessage("popupOpen");
 
-browser.runtime.onMessage.addListener((storedVolumeTarget) => {
-    volumeTarget = storedVolumeTarget;
+browser.runtime.onMessage.addListener((storedValues) => {
+    volumeTarget = storedValues["volumeTarget"];
+    volumeTargetSlider.value = storedValues["sliderValue"];
 });
 
 volumeTargetSlider.addEventListener("input", () => {
@@ -17,7 +18,8 @@ volumeTargetSlider.addEventListener("input", () => {
         volumeTarget = volumeTargetSlider.value - 19;
     }
 
-    browser.runtime.sendMessage(volumeTarget.toString());
+    browser.runtime.sendMessage({volumeTarget: volumeTarget.toString(),
+                                 sliderValue: volumeTargetSlider.value.toString()});
 
     browser.tabs.query({}).then((tabs) => {
         for (const tab of tabs) {
