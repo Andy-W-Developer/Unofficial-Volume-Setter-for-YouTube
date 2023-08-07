@@ -2,8 +2,8 @@
 var volumeTarget = localStorage.getItem("volumeTarget");
 
 if (volumeTarget === null) {
-    localStorage.setItem("volumeTarget", "20");
-    volumeTarget = 20;
+    localStorage.setItem("volumeTarget", "1");
+    volumeTarget = 1;
 } else {
     volumeTarget = parseInt(volumeTarget);
 }
