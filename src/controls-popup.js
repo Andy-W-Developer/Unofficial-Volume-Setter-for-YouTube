@@ -1,6 +1,12 @@
 const volumeTargetSlider = document.getElementById("volume-target-slider");
 var volumeTarget = 1;
 
+browser.runtime.sendMessage("popupOpen");
+
+browser.runtime.onMessage.addListener((storedVolumeTarget) => {
+    volumeTarget = storedVolumeTarget;
+});
+
 volumeTargetSlider.addEventListener("input", () => {
     browser.tabs.query({}).then((tabs) => {
         // 20 is the center of the volume slider, the range is 0 to 40
