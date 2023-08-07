@@ -17,6 +17,8 @@ volumeTargetSlider.addEventListener("input", () => {
         volumeTarget = volumeTargetSlider.value - 19;
     }
 
+    browser.runtime.sendMessage(volumeTarget.toString());
+
     browser.tabs.query({}).then((tabs) => {
         for (const tab of tabs) {
             browser.tabs.sendMessage(tab.id, {volumeTarget: volumeTarget});
