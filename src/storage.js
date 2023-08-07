@@ -14,7 +14,11 @@ browser.tabs.query({}).then((tabs) => {
     }
 });
 
-// Send/store volume target when changed in popup
+// Send volume target when popup is opened, store volume target when changed in popup
 browser.runtime.onMessage.addListener((newVolumeTarget) => {
-    localStorage.setItem("volumeTarget", newVolumeTarget);
+    if (newVolumeTarget === "popupOpen") {
+        browser.runtime.sendMessage(parseInt(localStorage.getItem("volumeTarget")));
+    } else {
+        localStorage.setItem("volumeTarget", newVolumeTarget);
+    }
 });
