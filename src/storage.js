@@ -1,4 +1,4 @@
-// Send volume target on extension startup
+// Send volume target to all tabs on extension startup
 var volumeTarget = localStorage.getItem("volumeTarget");
 
 if (volumeTarget === null) {
@@ -14,7 +14,7 @@ browser.tabs.query({}).then((tabs) => {
     }
 });
 
-// Store volume target when changed in popup
+// Send/store volume target when changed in popup
 browser.runtime.onMessage.addListener((newVolumeTarget) => {
     localStorage.setItem("volumeTarget", newVolumeTarget);
 });
