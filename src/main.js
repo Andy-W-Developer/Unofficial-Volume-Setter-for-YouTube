@@ -61,6 +61,6 @@ const videoStreamObserver = new MutationObserver(callback);
 videoStreamObserver.observe(videoStream, {attributes:true, attributeFilter:["src"]});
 
 browser.runtime.onMessage.addListener((listener) => {
-    volumeDecibelTarget = listener.volumeTarget;
+    volumeDecibelTarget = listener;
     changeVolumeDecibel();
 })

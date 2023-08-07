@@ -23,7 +23,7 @@ volumeTargetSlider.addEventListener("input", () => {
 
     browser.tabs.query({}).then((tabs) => {
         for (const tab of tabs) {
-            browser.tabs.sendMessage(tab.id, {volumeTarget: volumeTarget});
+            browser.tabs.sendMessage(tab.id, volumeTarget);
         }
     });
 });
