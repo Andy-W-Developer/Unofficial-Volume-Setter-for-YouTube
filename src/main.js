@@ -64,3 +64,5 @@ browser.runtime.onMessage.addListener((listener) => {
     volumeDecibelTarget = listener;
     changeVolumeDecibel();
 })
+
+browser.runtime.sendMessage("injected");
