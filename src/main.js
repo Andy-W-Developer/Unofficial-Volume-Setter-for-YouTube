@@ -1,4 +1,19 @@
 var volumeDecibel = 0;
+var volumeDecibelTarget = 1; // 1 is 0dBFS
+
+const audioContext = new AudioContext();
+const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
+const audioTrack = audioContext.createMediaElementSource(videoStream);
+var audioGain = audioContext.createGain();
+
+const callback = () => {
+    try {
+        parseVolumeDecibel();
+        changeVolumeDecibel();
+    } catch (e) {
+    }
+}
+const videoStreamObserver = new MutationObserver(callback);
 
 function parseVolumeDecibel() {
     let videoContainer = document.getElementById("movie_player");
@@ -27,15 +42,6 @@ function parseVolumeDecibel() {
     }
 }
 
-const audioContext = new AudioContext();
-const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
-const audioTrack = audioContext.createMediaElementSource(videoStream);
-var audioGain = audioContext.createGain();
-
-audioTrack.connect(audioGain).connect(audioContext.destination);
-
-var volumeDecibelTarget = 1; // 1 is 0dBFS
-
 function changeVolumeDecibel() {
     let volumeDecibelRatio = 10 ** (volumeDecibel / 20);
     let volumeDecibelGain = volumeDecibelTarget / volumeDecibelRatio;
@@ -43,21 +49,14 @@ function changeVolumeDecibel() {
     audioGain.gain.value = volumeDecibelGain;
 }
 
+audioTrack.connect(audioGain).connect(audioContext.destination);
+
 try {
     parseVolumeDecibel();
     changeVolumeDecibel();
 } catch (e) {
 }
 
-const callback = () => {
-    try {
-        parseVolumeDecibel();
-        changeVolumeDecibel();
-    } catch (e) {
-    }
-}
-
-const videoStreamObserver = new MutationObserver(callback);
 videoStreamObserver.observe(videoStream, {attributes:true, attributeFilter:["src"]});
 
 browser.runtime.onMessage.addListener((listener) => {
