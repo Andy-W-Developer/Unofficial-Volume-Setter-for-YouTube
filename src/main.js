@@ -35,12 +35,13 @@ function parseVolumeDecibel() {
 
     videoContainer.dispatchEvent(mouseContextMenu);
 
-    let contextMenuItems = document.getElementsByClassName("ytp-menuitem");
+    const statsMenuItem = Array.from(document.getElementsByClassName("ytp-menuitem"))
+        .filter(x => x.innerText.trim() === "Stats for nerds")[0];
     let mouseLeftClick = new MouseEvent("click");
 
     // EXAMPLE - CONTEXT MENU ITEMS AND INDEXES: Loop [0], Copy video URL [1], Copy video URL at current time [2], Copy embed code [3]
     //                                           Copy debug info [4], Troubleshoot playback issue [5], Stats for nerds [6]
-    contextMenuItems[6].dispatchEvent(mouseLeftClick);
+    statsMenuItem.dispatchEvent(mouseLeftClick);
 
     // EXAMPLE - PANEL VOLUMES: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
     let infoPanel = document.getElementsByClassName("html5-video-info-panel-content ytp-sfn-content")[0];
