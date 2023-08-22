@@ -7,13 +7,8 @@ let audioTrack = null;
 let audioGain = audioContext.createGain();
 
 const callback = () => {
-    try {
-        console.log("callback");
-
-        parseVolumeDecibel();
-        changeVolumeDecibel();
-    } catch (e) {
-    }
+    parseVolumeDecibel();
+    changeVolumeDecibel();
 }
 const videoStreamObserver = new MutationObserver(callback);
 
