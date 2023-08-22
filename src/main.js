@@ -1,10 +1,10 @@
-var volumeDecibel = 0;
-var volumeDecibelTarget = 1; // 1 is 0dBFS
+let volumeDecibel = 0;
+let volumeDecibelTarget = 1; // 1 is 0dBFS
 
 const audioContext = new AudioContext();
 const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
 const audioTrack = audioContext.createMediaElementSource(videoStream);
-var audioGain = audioContext.createGain();
+let audioGain = audioContext.createGain();
 
 const callback = () => {
     try {
