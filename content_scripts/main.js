@@ -1,5 +1,5 @@
 let volumeDecibel = 0;
-let volumeDecibelTarget = 1; // 1 is 0dBFS
+let volumeDecibelTarget = -14;
 
 const audioContext = new AudioContext();
 let videoStream = null;
@@ -55,6 +55,8 @@ function parseVolumeDecibel() {
     if (volumeDecibel > 0) {
         volumeDecibel = 0;
     }
+
+    volumeDecibel = volumeDecibel - 14;
 }
 
 function changeVolumeDecibel() {

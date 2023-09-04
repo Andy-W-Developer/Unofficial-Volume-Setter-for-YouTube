@@ -2,8 +2,8 @@
 var volumeTarget = localStorage.getItem("volumeTarget");
 
 if (volumeTarget === null) {
-    localStorage.setItem("volumeTarget", "1");
-    volumeTarget = 1;
+    localStorage.setItem("volumeTarget", "-14");
+    volumeTarget = -14;
 } else {
     volumeTarget = parseFloat(volumeTarget);
 }
