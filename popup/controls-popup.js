@@ -1,4 +1,5 @@
 const volumeTargetSlider = document.getElementById("volume-target-slider");
+const volumeTargetText = document.getElementById("volume-target");
 var volumeTarget = -14;
 
 browser.runtime.sendMessage("popupOpen");
@@ -9,6 +10,7 @@ browser.runtime.onMessage.addListener((storedValues) => {
 
 volumeTargetSlider.addEventListener("input", () => {
     volumeTarget = volumeTargetSlider.value;
+    volumeTargetText.innerText = volumeTargetSlider.value;
 
     browser.runtime.sendMessage({volumeTarget: volumeTarget.toString()});
 
