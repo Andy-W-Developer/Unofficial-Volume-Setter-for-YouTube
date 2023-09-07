@@ -1,5 +1,5 @@
-let volumeDecibel = 0;
-let volumeDecibelTarget = -14;
+let volumeDecibel = null;
+let volumeDecibelTarget = null;
 
 const audioContext = new AudioContext();
 let videoStream = null;
