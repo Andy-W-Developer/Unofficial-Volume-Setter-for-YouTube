@@ -61,7 +61,8 @@ function parseVolumeDecibel() {
 
 function changeVolumeDecibel() {
     let volumeDecibelRatio = 10 ** (volumeDecibel / 20);
-    let volumeDecibelGain = volumeDecibelTarget / volumeDecibelRatio;
+    let volumeDecibelTargetRatio = 10 ** (volumeDecibelTarget / 20);
+    let volumeDecibelGain = volumeDecibelTargetRatio / volumeDecibelRatio;
 
     audioGain.gain.value = volumeDecibelGain;
 }
