@@ -71,6 +71,8 @@ pageManagerObserver.observe(pageManager, {childList:true, subtree:true});
 
 browser.runtime.onMessage.addListener((listener) => {
     volumeDecibelTarget = listener;
+
+    parseVolumeDecibel();
     changeVolumeDecibel();
 })
 
