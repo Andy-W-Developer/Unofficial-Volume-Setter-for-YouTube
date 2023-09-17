@@ -1,4 +1,3 @@
-// Send volume target to all tabs on extension startup
 function sendVolumeTargetOnStartup() {
     var volumeTarget = localStorage.getItem("volumeTarget");
 
