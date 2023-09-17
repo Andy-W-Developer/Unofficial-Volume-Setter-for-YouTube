@@ -56,6 +56,7 @@ function parseVolumeDecibel() {
         volumeDecibel = 0;
     }
 
+    // 0dB in YouTube is -14dB LUFS
     volumeDecibel = volumeDecibel - 14;
 }
 
