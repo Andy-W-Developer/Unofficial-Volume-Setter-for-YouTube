@@ -1,5 +1,5 @@
 function sendVolumeTargetOnStartup() {
-    var volumeTarget = localStorage.getItem("volumeTarget");
+    let volumeTarget = localStorage.getItem("volumeTarget");
 
     if (volumeTarget === null) {
         localStorage.setItem("volumeTarget", "-14");
