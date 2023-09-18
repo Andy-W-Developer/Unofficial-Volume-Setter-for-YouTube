@@ -6,6 +6,9 @@ browser.runtime.sendMessage("popupOpen");
 
 browser.runtime.onMessage.addListener((storedValues) => {
     volumeTarget = storedValues["volumeTarget"];
+
+    volumeTargetSlider.value = storedValues["volumeTarget"];
+    volumeTargetText.innerText = storedValues["volumeTarget"];
 });
 
 volumeTargetSlider.addEventListener("input", () => {
