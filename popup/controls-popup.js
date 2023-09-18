@@ -1,6 +1,6 @@
 const volumeTargetSlider = document.getElementById("volume-target-slider");
 const volumeTargetText = document.getElementById("volume-target");
-var volumeTarget = -14;
+var volumeTarget = null;
 
 browser.runtime.sendMessage("popupOpen");
 
