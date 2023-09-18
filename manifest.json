@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "YouTube Volume Normalization",
-  "version": "0.2",
+  "version": "0.3",
 
   "description": "Normalizes the volumes of YouTube videos to a user-chosen volume.",
   "homepage_url": "https://github.com/Andy-W-Developer/YouTube-Volume-Normalization",
