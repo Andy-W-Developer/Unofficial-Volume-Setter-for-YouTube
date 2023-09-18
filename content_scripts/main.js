@@ -14,13 +14,9 @@ const videoStreamObserver = new MutationObserver(callback);
 
 const pageManager = document.getElementById("page-manager");
 const pageManagerObserver = new MutationObserver(() => {
-    console.log("page manager observer");
-
     videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
 
     if (videoStream) {
-        console.log("video stream found");
-
         audioTrack = audioContext.createMediaElementSource(videoStream);
         audioTrack.connect(audioGain).connect(audioContext.destination);
 
