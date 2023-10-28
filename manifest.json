@@ -1,5 +1,4 @@
 {
-
   "manifest_version": 2,
   "name": "YouTube Volume Setter",
   "version": "0.3",
@@ -24,5 +23,4 @@
       "js": ["/content_scripts/main.js"]
     }
   ]
-
 }
