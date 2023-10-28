@@ -12,7 +12,6 @@ const callback = () => {
 }
 const videoStreamObserver = new MutationObserver(callback);
 
-const pageManager = document.getElementById("page-manager");
 const pageManagerObserver = new MutationObserver(() => {
     videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
 
@@ -24,6 +23,16 @@ const pageManagerObserver = new MutationObserver(() => {
         pageManagerObserver.disconnect();
     }
 });
+
+const bodyObserver = new MutationObserver(() => {
+    const pageManager = document.getElementById("page-manager");
+
+    if (pageManager) {
+        pageManagerObserver.observe(pageManager, {childList:true, subtree:true});
+        bodyObserver.disconnect();
+    }
+});
+const documentBody = document.body;
 
 function parseVolumeDecibel() {
     let videoContainer = document.getElementById("movie_player");
@@ -64,7 +73,6 @@ function changeVolumeDecibel() {
     audioGain.gain.value = volumeDecibelGain;
 }
 
-pageManagerObserver.observe(pageManager, {childList:true, subtree:true});
 
 browser.runtime.onMessage.addListener((listener) => {
     volumeDecibelTarget = listener;
@@ -74,3 +82,6 @@ browser.runtime.onMessage.addListener((listener) => {
 })
 
 browser.runtime.sendMessage("injected");
+
+// bodyObserver -> pageManager -> videoStream
+bodyObserver.observe(documentBody, {childList:true, subtree:true});
