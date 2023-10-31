@@ -8,21 +8,21 @@ function sendVolumeTargetOnStartup() {
         volumeTarget = parseInt(volumeTarget);
     }
 
-    browser.tabs.query({}).then((tabs) => {
+    chrome.tabs.query({}).then((tabs) => {
         for (const tab of tabs) {
-            browser.tabs.sendMessage(volumeTarget);
+            chrome.tabs.sendMessage(volumeTarget);
         }
     });
 }
 
 // Send volume target when popup is opened, store volume target when changed in popup
-browser.runtime.onMessage.addListener((newValues) => {
+chrome.runtime.onMessage.addListener((newValues) => {
     if (newValues === "popupOpen") {
-        browser.runtime.sendMessage({volumeTarget: parseInt(localStorage.getItem("volumeTarget"))});
+        chrome.runtime.sendMessage({volumeTarget: parseInt(localStorage.getItem("volumeTarget"))});
     } else if (newValues === "injected") {
-        browser.tabs.query({}).then((tabs) => {
+        chrome.tabs.query({}).then((tabs) => {
             for (const tab of tabs) {
-                browser.tabs.sendMessage(tab.id, parseInt(localStorage.getItem("volumeTarget")));
+                chrome.tabs.sendMessage(tab.id, parseInt(localStorage.getItem("volumeTarget")));
             }
         });
     } else {

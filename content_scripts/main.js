@@ -73,14 +73,14 @@ function changeVolumeDecibel() {
 }
 
 
-browser.runtime.onMessage.addListener((listener) => {
+chrome.runtime.onMessage.addListener((listener) => {
     volumeDecibelTarget = listener;
 
     parseVolumeDecibel();
     changeVolumeDecibel();
 })
 
-browser.runtime.sendMessage("injected");
+chrome.runtime.sendMessage("injected");
 
 // bodyObserver -> pageManager -> videoStream
 bodyObserver.observe(documentBody, {childList:true, subtree:true});
