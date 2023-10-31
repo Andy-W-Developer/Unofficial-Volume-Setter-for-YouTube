@@ -17,7 +17,7 @@ volumeTargetSlider.addEventListener("input", () => {
 
     chrome.runtime.sendMessage({volumeTarget: volumeTarget.toString()});
 
-    chrome.tabs.query({}).then((tabs) => {
+    chrome.tabs.query({}, (tabs) => {
         for (const tab of tabs) {
             chrome.tabs.sendMessage(tab.id, volumeTarget);
         }

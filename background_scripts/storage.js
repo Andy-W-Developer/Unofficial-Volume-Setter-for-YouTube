@@ -8,7 +8,7 @@ function sendVolumeTargetOnStartup() {
         volumeTarget = parseInt(volumeTarget);
     }
 
-    chrome.tabs.query({}).then((tabs) => {
+    chrome.tabs.query({}, (tabs) => {
         for (const tab of tabs) {
             chrome.tabs.sendMessage(volumeTarget);
         }
@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener((newValues) => {
     if (newValues === "popupOpen") {
         chrome.runtime.sendMessage({volumeTarget: parseInt(localStorage.getItem("volumeTarget"))});
     } else if (newValues === "injected") {
-        chrome.tabs.query({}).then((tabs) => {
+        chrome.tabs.query({}, (tabs) => {
             for (const tab of tabs) {
                 chrome.tabs.sendMessage(tab.id, parseInt(localStorage.getItem("volumeTarget")));
             }
