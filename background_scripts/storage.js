@@ -10,7 +10,7 @@ function sendVolumeTargetOnStartup() {
 
     chrome.tabs.query({}, (tabs) => {
         for (const tab of tabs) {
-            chrome.tabs.sendMessage(volumeTarget);
+            chrome.tabs.sendMessage(tab.id, volumeTarget);
         }
     });
 }
