@@ -35,23 +35,23 @@ const bodyObserver = new MutationObserver(() => {
 const documentBody = document.body;
 
 function parseVolumeDecibel() {
-    let videoContainer = document.getElementById("movie_player");
-    let mouseContextMenu = new MouseEvent("contextmenu");
+    const videoContainer = document.getElementById("movie_player");
+    const mouseContextMenu = new MouseEvent("contextmenu");
 
     videoContainer.dispatchEvent(mouseContextMenu);
 
     const statsMenuItem = Array.from(document.getElementsByClassName("ytp-menuitem"))
         .filter(x => x.innerText.trim() === "Stats for nerds")[0];
-    let mouseLeftClick = new MouseEvent("click");
+    const mouseLeftClick = new MouseEvent("click");
 
     // EXAMPLE - CONTEXT MENU ITEMS AND INDEXES: Loop [0], Copy video URL [1], Copy video URL at current time [2], Copy embed code [3]
     //                                           Copy debug info [4], Troubleshoot playback issue [5], Stats for nerds [6]
     statsMenuItem.dispatchEvent(mouseLeftClick);
 
     // EXAMPLE - PANEL VOLUMES: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
-    let infoPanel = document.getElementsByClassName("html5-video-info-panel-content ytp-sfn-content")[0];
-    let infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.split(' ');
-    let infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
+    const infoPanel = document.getElementsByClassName("html5-video-info-panel-content ytp-sfn-content")[0];
+    const infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.split(' ');
+    const infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
 
     infoPanelButtonClose.dispatchEvent(mouseLeftClick);
 
@@ -66,9 +66,9 @@ function parseVolumeDecibel() {
 }
 
 function changeVolumeDecibel() {
-    let volumeDecibelRatio = 10 ** (volumeDecibel / 20);
-    let volumeDecibelTargetRatio = 10 ** (volumeDecibelTarget / 20);
-    let volumeDecibelGain = volumeDecibelTargetRatio / volumeDecibelRatio;
+    const volumeDecibelRatio = 10 ** (volumeDecibel / 20);
+    const volumeDecibelTargetRatio = 10 ** (volumeDecibelTarget / 20);
+    const volumeDecibelGain = volumeDecibelTargetRatio / volumeDecibelRatio;
 
     audioGain.gain.value = volumeDecibelGain;
 }
