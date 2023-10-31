@@ -1,8 +1,7 @@
-let volumeDecibel = 0;
-let volumeDecibelTarget = 1; // 1 is 0dBFS
+let volumeDecibel = null;
+let volumeDecibelTarget = null;
 
 const audioContext = new AudioContext();
-let videoStream = null;
 let audioTrack = null;
 let audioGain = audioContext.createGain();
 
@@ -12,16 +11,11 @@ const callback = () => {
 }
 const videoStreamObserver = new MutationObserver(callback);
 
-const pageManager = document.getElementById("page-manager");
 const pageManagerObserver = new MutationObserver(() => {
-    console.log("page manager observer");
-
-    videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
+    const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
 
     if (videoStream) {
-        console.log("video stream found");
-
-        audioTrack = audioContext.createMediaElementSource(videoStream);
+        const audioTrack = audioContext.createMediaElementSource(videoStream);
         audioTrack.connect(audioGain).connect(audioContext.destination);
 
         videoStreamObserver.observe(videoStream, {attributes:true, attributeFilter:["src"]});
@@ -29,24 +23,34 @@ const pageManagerObserver = new MutationObserver(() => {
     }
 });
 
+const bodyObserver = new MutationObserver(() => {
+    const pageManager = document.getElementById("page-manager");
+
+    if (pageManager) {
+        pageManagerObserver.observe(pageManager, {childList:true, subtree:true});
+        bodyObserver.disconnect();
+    }
+});
+const documentBody = document.body;
+
 function parseVolumeDecibel() {
-    let videoContainer = document.getElementById("movie_player");
-    let mouseContextMenu = new MouseEvent("contextmenu");
+    const videoContainer = document.getElementById("movie_player");
+    const mouseContextMenu = new MouseEvent("contextmenu");
 
     videoContainer.dispatchEvent(mouseContextMenu);
 
     const statsMenuItem = Array.from(document.getElementsByClassName("ytp-menuitem"))
         .filter(x => x.innerText.trim() === "Stats for nerds")[0];
-    let mouseLeftClick = new MouseEvent("click");
+    const mouseLeftClick = new MouseEvent("click");
 
     // EXAMPLE - CONTEXT MENU ITEMS AND INDEXES: Loop [0], Copy video URL [1], Copy video URL at current time [2], Copy embed code [3]
     //                                           Copy debug info [4], Troubleshoot playback issue [5], Stats for nerds [6]
     statsMenuItem.dispatchEvent(mouseLeftClick);
 
     // EXAMPLE - PANEL VOLUMES: Array(7) [ "", "100%", "/", "100%", "(content", "loudness", "-1.7dB)" ]
-    let infoPanel = document.getElementsByClassName("html5-video-info-panel-content ytp-sfn-content")[0];
-    let infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.split(' ');
-    let infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
+    const infoPanel = document.getElementsByClassName("html5-video-info-panel-content ytp-sfn-content")[0];
+    const infoPanelVolumes = infoPanel.getElementsByTagName("span")[3].textContent.split(' ');
+    const infoPanelButtonClose = document.getElementsByClassName("ytp-sfn-close html5-video-info-panel-close ytp-button")[0];
 
     infoPanelButtonClose.dispatchEvent(mouseLeftClick);
 
@@ -55,20 +59,28 @@ function parseVolumeDecibel() {
     if (volumeDecibel > 0) {
         volumeDecibel = 0;
     }
+
+    // 0dB in YouTube is -14dB LUFS
+    volumeDecibel = volumeDecibel - 14;
 }
 
 function changeVolumeDecibel() {
-    let volumeDecibelRatio = 10 ** (volumeDecibel / 20);
-    let volumeDecibelGain = volumeDecibelTarget / volumeDecibelRatio;
+    const volumeDecibelRatio = 10 ** (volumeDecibel / 20);
+    const volumeDecibelTargetRatio = 10 ** (volumeDecibelTarget / 20);
+    const volumeDecibelGain = volumeDecibelTargetRatio / volumeDecibelRatio;
 
     audioGain.gain.value = volumeDecibelGain;
 }
 
-pageManagerObserver.observe(pageManager, {childList:true, subtree:true});
 
 browser.runtime.onMessage.addListener((listener) => {
     volumeDecibelTarget = listener;
+
+    parseVolumeDecibel();
     changeVolumeDecibel();
 })
 
 browser.runtime.sendMessage("injected");
+
+// bodyObserver -> pageManager -> videoStream
+bodyObserver.observe(documentBody, {childList:true, subtree:true});

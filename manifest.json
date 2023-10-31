@@ -1,14 +1,13 @@
 {
-
   "manifest_version": 2,
-  "name": "YouTube Volume Normalization",
-  "version": "0.2",
+  "name": "YouTube Volume Setter",
+  "version": "0.3",
 
-  "description": "Normalizes the volumes of YouTube videos to a user-chosen volume.",
-  "homepage_url": "https://github.com/Andy-W-Developer/YouTube-Volume-Normalization",
+  "description": "Sets the volumes of YouTube videos to a user-chosen volume.",
+  "homepage_url": "https://github.com/Andy-W-Developer/YouTube-Volume-Setter",
 
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "icons/icon128.png",
     "default_title": "Youtube Volume Setter",
     "default_popup": "/popup/controls.html"
   },
@@ -24,5 +23,4 @@
       "js": ["/content_scripts/main.js"]
     }
   ]
-
 }

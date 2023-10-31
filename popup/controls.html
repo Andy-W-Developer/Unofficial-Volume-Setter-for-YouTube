@@ -5,7 +5,13 @@
     </head>
 
     <body>
-        <input id="volume-target-slider" type="range" value="20" min="0" max="40" step="1" />
+        <p>Current Volume Target: <label id="volume-target">ERROR</label>dB LUFS</p>
+        <input id="volume-target-slider" type="range" value="-14" min="-30" max="-6" step="1" />
         <script type="text/javascript" src="controls-popup.js"></script>
+        <p>Volume Targets:</p>
+        <p>Spotify (Loud): -11dB LUFS</p>
+        <p>Spotify (Normal), YouTube: -14dB LUFS</p>
+        <p>Apple Music: -16 LUFS</p>
+        <p>Spotify (Quiet): -19dB LUFS</p>
     </body>
 </html>
