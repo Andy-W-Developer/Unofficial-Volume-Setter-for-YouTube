@@ -7,7 +7,7 @@
   "homepage_url": "https://github.com/Andy-W-Developer/Unofficial-Volume-Setter-for-YouTube",
 
   "browser_action": {
-    "default_icon": "icons/icon128.png",
+    "default_icon": "/icons/icon128.png",
     "default_title": "Unofficial Volume Setter for YouTube",
     "default_popup": "/popup/controls.html"
   },
