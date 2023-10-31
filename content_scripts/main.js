@@ -2,7 +2,6 @@ let volumeDecibel = null;
 let volumeDecibelTarget = null;
 
 const audioContext = new AudioContext();
-let videoStream = null;
 let audioTrack = null;
 let audioGain = audioContext.createGain();
 
@@ -13,10 +12,10 @@ const callback = () => {
 const videoStreamObserver = new MutationObserver(callback);
 
 const pageManagerObserver = new MutationObserver(() => {
-    videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
+    const videoStream = document.getElementsByClassName("video-stream html5-main-video")[0];
 
     if (videoStream) {
-        audioTrack = audioContext.createMediaElementSource(videoStream);
+        const audioTrack = audioContext.createMediaElementSource(videoStream);
         audioTrack.connect(audioGain).connect(audioContext.destination);
 
         videoStreamObserver.observe(videoStream, {attributes:true, attributeFilter:["src"]});
