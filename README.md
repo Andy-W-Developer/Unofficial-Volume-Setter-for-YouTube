@@ -1,4 +1,4 @@
-# YouTube-Volume-Setter
+# Unofficial Volume Setter for YouTube
 A browser extension to set the volumes of YouTube videos to a user-chosen volume
 
 # Supported Browsers
