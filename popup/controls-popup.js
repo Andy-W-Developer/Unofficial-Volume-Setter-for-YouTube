@@ -2,9 +2,9 @@ const volumeTargetSlider = document.getElementById("volume-target-slider");
 const volumeTargetText = document.getElementById("volume-target");
 let volumeTarget = null;
 
-browser.runtime.sendMessage("popupOpen");
+chrome.runtime.sendMessage("popupOpen");
 
-browser.runtime.onMessage.addListener((storedValues) => {
+chrome.runtime.onMessage.addListener((storedValues) => {
     volumeTarget = storedValues["volumeTarget"];
 
     volumeTargetSlider.value = storedValues["volumeTarget"];
@@ -15,11 +15,11 @@ volumeTargetSlider.addEventListener("input", () => {
     volumeTarget = volumeTargetSlider.value;
     volumeTargetText.innerText = volumeTargetSlider.value;
 
-    browser.runtime.sendMessage({volumeTarget: volumeTarget.toString()});
+    chrome.runtime.sendMessage({volumeTarget: volumeTarget.toString()});
 
-    browser.tabs.query({}).then((tabs) => {
+    chrome.tabs.query({}, (tabs) => {
         for (const tab of tabs) {
-            browser.tabs.sendMessage(tab.id, volumeTarget);
+            chrome.tabs.sendMessage(tab.id, volumeTarget);
         }
     });
 });
